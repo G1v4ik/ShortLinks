@@ -2,6 +2,8 @@ import validators
 
 from starlette.datastructures import URL
 
+from fastapi.responses import JSONResponse
+
 from fastapi import (
     Depends,
     FastAPI,
@@ -44,7 +46,12 @@ def create_url(url: schemas.URLBase, db:Session = Depends(get_db)):
         raise_bad_request(message="Your provided URL is not valid")
     
     db_url = crud.create_db_url(db=db, url=url)
-    return get_url_info(db_url)
+    info = get_url_info(db_url)
+    return JSONResponse(content={
+        "target_url": info.target_url,
+        "url": info.url,
+        "key": info.key
+        }, status_code=201)
 
 
 @app.get('/{url_key}', response_model=schemas.URL)
@@ -58,6 +65,7 @@ def forward_to_target_url(
     
     else:
         raise_not_found(request)
+
 
 def get_url_info(db_url: models.URL) -> schemas.URL:
     base_url = URL(get_settings().base_url)
