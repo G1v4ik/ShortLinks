@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 
 class URLBase(BaseModel):
-    targrt_url: str
+    target_url: str
 
 
 class URL(URLBase):
