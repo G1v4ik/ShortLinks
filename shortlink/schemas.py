@@ -7,4 +7,4 @@ class URLBase(BaseModel):
 class URL(URLBase):
     model_config = ConfigDict(from_attributes=True)
     
-    key: str
+    url: str
