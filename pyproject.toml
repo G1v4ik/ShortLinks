@@ -1,0 +1,12 @@
+[project]
+name = "shortlinks"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi[all]>=0.115.12",
+    "sqlalchemy>=2.0.41",
+    "uvicorn>=0.34.2",
+    "validators>=0.35.0",
+]
